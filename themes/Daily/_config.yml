@@ -1,0 +1,50 @@
+# basic
+title: Daily
+subtitle: Minimalism, simplicity and refined details
+favicon: /images/icon.png
+
+# avatar: images/avatar.png
+# banner_small: images/banner-small.png
+# banner_large: images/banner-large.png
+logo: /images/icon.png
+
+# disqus
+#disqus_shortname: drakeleung
+
+highlight:
+  enable: true
+  line_number: false
+  auto_detect: false
+  tab_replace:
+
+# nav #
+nav:
+  home: .
+  archive: archives
+  # about: about
+  # rss: atom.xml
+
+# hexo-renderer-sass
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+
+# Default post title
+default_post_title: Untitled
+
+# social
+social:
+  github: https://github.com/RunningV
+  # weibo: http://weibo.com/10010800
+  # mail: mailto:gallenhu@foxmail.com
+  # twitter: https://twitter.com/GallenHu
+
+# widget
+#   title: 标题
+#   content: 内容
+widget:
+  title: ABOUTS ME
+  content: <div>I'm Running, a web front-end engineer, love coding love life. Like music espically english , playing ukulele, table tennis, running.</div>
+
+footer: Powered by <a href="https://github.com/RunningV" target="_blank">RunningV</a>
