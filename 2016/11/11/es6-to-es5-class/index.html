@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>es6定义对象class编译到es5代码解读 | I&#39;m Running,Let&#39;s go !</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="es6 class babel," />
+  
+
+  <meta name="description" content="es6定义对象class编译到es5代码解读1.es6代码：12345class one &amp;#123;  say() &amp;#123;    console.log(&amp;quot;hello world&amp;quot;);  &amp;#125;&amp;#125;
+上面使用es6的class定义一个简单的类，使用babel编译到es5的代码是什么样子？
+2. es5代码如下：12345678910111213141516">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6定义对象class编译到es5代码解读">
+<meta property="og:url" content="http://yoursite.com/2016/11/11/es6-to-es5-class/index.html">
+<meta property="og:site_name" content="I'm Running,Let's go !">
+<meta property="og:description" content="es6定义对象class编译到es5代码解读1.es6代码：12345class one &amp;#123;  say() &amp;#123;    console.log(&amp;quot;hello world&amp;quot;);  &amp;#125;&amp;#125;
+上面使用es6的class定义一个简单的类，使用babel编译到es5的代码是什么样子？
+2. es5代码如下：12345678910111213141516">
+<meta property="og:updated_time" content="2017-02-06T06:09:33.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es6定义对象class编译到es5代码解读">
+<meta name="twitter:description" content="es6定义对象class编译到es5代码解读1.es6代码：12345class one &amp;#123;  say() &amp;#123;    console.log(&amp;quot;hello world&amp;quot;);  &amp;#125;&amp;#125;
+上面使用es6的class定义一个简单的类，使用babel编译到es5的代码是什么样子？
+2. es5代码如下：12345678910111213141516">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#es6定义对象class编译到es5代码解读"><span class="toc-text">es6定义对象class编译到es5代码解读</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-es6代码："><span class="toc-text">1.es6代码：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-es5代码如下："><span class="toc-text">2. es5代码如下：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-解读es5代码"><span class="toc-text">3. 解读es5代码</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-总结"><span class="toc-text">4. 总结</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-es6-to-es5-class" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">es6定义对象class编译到es5代码解读</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.11.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Running_V</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="es6定义对象class编译到es5代码解读"><a href="#es6定义对象class编译到es5代码解读" class="headerlink" title="es6定义对象class编译到es5代码解读"></a>es6定义对象class编译到es5代码解读</h2><h6 id="1-es6代码："><a href="#1-es6代码：" class="headerlink" title="1.es6代码："></a>1.es6代码：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class one &#123;</div><div class="line">  say() &#123;</div><div class="line">    console.log(&quot;hello world&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面使用es6的class定义一个简单的类，使用<code>babel</code>编译到es5的代码是什么样子？</p>
+<h6 id="2-es5代码如下："><a href="#2-es5代码如下：" class="headerlink" title="2. es5代码如下："></a>2. es5代码如下：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line">//1.定义拷贝函数</div><div class="line">var _createClass = function () &#123;</div><div class="line">  function defineProperties(target, props) &#123;</div><div class="line">    for (var i = 0; i &lt; props.length; i++) &#123;</div><div class="line">      var descriptor = props[i];</div><div class="line">      descriptor.enumerable = descriptor.enumerable || false;</div><div class="line">      descriptor.configurable = true;</div><div class="line">      if (&quot;value&quot; in descriptor) descriptor.writable = true;</div><div class="line">      Object.defineProperty(target, descriptor.key, descriptor);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return function (Constructor, protoProps, staticProps) &#123;</div><div class="line">    if (protoProps) defineProperties(Constructor.prototype, protoProps);</div><div class="line">    if (staticProps) defineProperties(Constructor, staticProps);</div><div class="line">    return Constructor;</div><div class="line">  &#125;;</div><div class="line">&#125;();</div><div class="line"></div><div class="line">//2. 检查构造函数</div><div class="line">function _classCallCheck(instance, Constructor) &#123;</div><div class="line">  if (!(instance instanceof Constructor)) &#123;</div><div class="line">    throw new TypeError(&quot;Cannot call a class as a function&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//3. 定义对象函数</div><div class="line">var one = function () &#123;</div><div class="line">  function one() &#123;</div><div class="line">    _classCallCheck(this, one);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  _createClass(one, [&#123;</div><div class="line">    key: &apos;say&apos;,</div><div class="line">    value: function say() &#123;</div><div class="line">      console.log(&apos;hello world&apos;);</div><div class="line">    &#125;</div><div class="line">  &#125;]);</div><div class="line"></div><div class="line">  return one;</div><div class="line">&#125;();</div></pre></td></tr></table></figure>
+<h6 id="3-解读es5代码"><a href="#3-解读es5代码" class="headerlink" title="3. 解读es5代码"></a>3. 解读es5代码</h6><p>编译后的代码分共三个函数。</p>
+<p>1）</p>
+<p>定义_createClass = 一个立即执行匿名函数。匿名函数内部定义<code>definProperties</code>函数将属性循环拷贝到目标对象上； 然后返回一个函数有三个参数<code>(Constructor, protoProps, staticProps)</code>, 内部调用<code>definProperties</code> 分别将原型属性拷贝到构造函数的原型，静态属性拷贝到构造函数本身，并返回此构造函数。</p>
+<p>2）</p>
+<p>定义类型检查报错函数<code>_classCallCheck</code>,如果instance不是构造函数的实例，抛出错误：不能将类当做函数调用？</p>
+<p>3）</p>
+<p>定义我们写的es6代码中的类<code>one</code>,也是一个立即函数，定义一个空函数，调用<code>_createClass</code>将es6中class定义的函数以键值对的形式组合成数组对象传递进去。</p>
+<h6 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h6><p>es6的class转换为es5代码实际就是创建一个与class类名相同的构造函数，并将class中的属性方法绑定到同名构造函数的原型上的过程。要调用one的属性方法还需要<code>new</code>实例化。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="hide pull-left" href="/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
