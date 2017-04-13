@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>cordova打包简单教程--android篇 | I&#39;m Running,Let&#39;s go !</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="cordova npm native," />
+  
+
+  <meta name="description" content="最近在开发移动端app,html页面开发完成后如何打包成原生app呢？我就去研究了下cordova打包工具，看起来蛮简单，写个入门教程，针对小白用户。
+1. 安装cordova，命令行输入：npm install -g cordova请确保你的网络好，最好能翻墙。（用cnpm等国内代理npm的可能会失败）安装完毕后命令行输入:cordova --help显示以下内容后续操作全部基于上图中的Exam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cordova打包简单教程--android篇">
+<meta property="og:url" content="http://yoursite.com/2017/04/11/cordova-build-app-tutorial/index.html">
+<meta property="og:site_name" content="I'm Running,Let's go !">
+<meta property="og:description" content="最近在开发移动端app,html页面开发完成后如何打包成原生app呢？我就去研究了下cordova打包工具，看起来蛮简单，写个入门教程，针对小白用户。
+1. 安装cordova，命令行输入：npm install -g cordova请确保你的网络好，最好能翻墙。（用cnpm等国内代理npm的可能会失败）安装完毕后命令行输入:cordova --help显示以下内容后续操作全部基于上图中的Exam">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/1.png">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/2.png">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/1.2.png">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/3.png">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/4.png">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/5.png">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/5.1.png">
+<meta property="og:image" content="http://yoursite.com/images/cordova-tutorials/6.png">
+<meta property="og:updated_time" content="2017-04-13T09:10:20.237Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cordova打包简单教程--android篇">
+<meta name="twitter:description" content="最近在开发移动端app,html页面开发完成后如何打包成原生app呢？我就去研究了下cordova打包工具，看起来蛮简单，写个入门教程，针对小白用户。
+1. 安装cordova，命令行输入：npm install -g cordova请确保你的网络好，最好能翻墙。（用cnpm等国内代理npm的可能会失败）安装完毕后命令行输入:cordova --help显示以下内容后续操作全部基于上图中的Exam">
+<meta name="twitter:image" content="http://yoursite.com/images/cordova-tutorials/1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装cordova，命令行输入："><span class="toc-text">1. 安装cordova，命令行输入：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-创建应用项目-在自己想创建项目的目录打开CLI，后续命令全部在CLI中执行"><span class="toc-text">2. 创建应用项目,在自己想创建项目的目录打开CLI，后续命令全部在CLI中执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-添加插件"><span class="toc-text">3. 添加插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-添加平台"><span class="toc-text">4 添加平台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-打包成android-apk"><span class="toc-text">5 打包成android apk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-总结"><span class="toc-text">6 总结</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-cordova-build-app-tutorial" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">cordova打包简单教程--android篇</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.04.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Running_V</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>最近在开发移动端app,html页面开发完成后如何打包成原生app呢？我就去研究了<br>下<code>cordova</code>打包工具，看起来蛮简单，写个入门教程，针对小白用户。</p>
+<h3 id="1-安装cordova，命令行输入："><a href="#1-安装cordova，命令行输入：" class="headerlink" title="1. 安装cordova，命令行输入："></a>1. 安装cordova，命令行输入：</h3><p><code>npm install -g cordova</code><br>请确保你的网络好，最好能翻墙。（用cnpm等国内代理npm的可能会失败）<br>安装完毕后命令行输入:<br><code>cordova --help</code><br>显示以下内容<br><img src="/images/cordova-tutorials/1.png" alt="&#39;cordova安装成功输出&#39;"><br>后续操作全部基于上图中的<code>Examples</code>命令;</p>
+<h3 id="2-创建应用项目-在自己想创建项目的目录打开CLI，后续命令全部在CLI中执行"><a href="#2-创建应用项目-在自己想创建项目的目录打开CLI，后续命令全部在CLI中执行" class="headerlink" title="2. 创建应用项目,在自己想创建项目的目录打开CLI，后续命令全部在CLI中执行"></a>2. 创建应用项目,在自己想创建项目的目录打开<code>CLI</code>，后续命令全部在CLI中执行</h3><p><code>cordova create myApp org.apache.cordava.myApp myApp</code><br>此命令会在当前目录创建myApp项目，目录结构如下图：<br><img src="/images/cordova-tutorials/2.png" alt="&#39;cordova安装成功输出&#39;"><br>创建成功后CLI输出信息如下<br><img src="/images/cordova-tutorials/1.2.png" alt="&#39;cordova安装成功输出&#39;"><br><code>cd myApp</code><br><code>cordova telemetry on</code> //此命令未知何用，根据创建完成提示操作<br>主要内容在<code>www</code>目录下；<code>platforms</code>与<code>plugins</code>目录都为空，下面我们就来添加平台和插件</p>
+<h3 id="3-添加插件"><a href="#3-添加插件" class="headerlink" title="3. 添加插件"></a>3. 添加插件</h3><p>我们在app中会调用一些系统的权限或事件，cordova提供了这些插件，现在就来添加一个相机调用插件<br><code>cordova plugin add cordova-plugin-camera --save</code><br>添加成功CLI输出信息如下图：<br><img src="/images/cordova-tutorials/3.png" alt="&#39;cordova安装成功输出&#39;"><br>可以在plugins目录查看到添加的插件信息</p>
+<h3 id="4-添加平台"><a href="#4-添加平台" class="headerlink" title="4 添加平台"></a>4 添加平台</h3><p>添加平台用于打包成原生app,对于android需要提前安装<code>java</code>和<code>android SDK</code>,<br>否则无法打包成<code>android apk</code>;<br><code>Java</code>和<code>Android SDK</code>的安装自行搜索，这两个略有难度；现在我们添加android平台<br><code>cordova platform add android --save</code><br>添加成功CLI输出如下：<br><img src="/images/cordova-tutorials/4.png" alt="&#39;cordova安装成功输出&#39;"><br>此时可以在<code>platforms</code>目录看到<code>android</code>资源信息<br><code>cordova requirement android</code><br>由于我开始没有安装<code>Android SDK</code>此处报错没有找到<code>ANDROID_HOME</code><br><img src="/images/cordova-tutorials/5.png" alt="&#39;cordova安装成功输出&#39;"><br><strong><em>JDK和android SDK的安装教程大家另行搜索，此处安装完成后可能还会遇到其他问题<br>，希望大家耐心网上搜索答案</em></strong><br>我在电脑安装JDK和SDK成功了，但是输入<code>cordova requirement android</code>还是显示以下错误<br><img src="/images/cordova-tutorials/5.1.png" alt="&#39;cordova安装成功输出&#39;"><br>花了半天时间卡在这个地方。我就尝试下一步打包apk</p>
+<h3 id="5-打包成android-apk"><a href="#5-打包成android-apk" class="headerlink" title="5 打包成android apk"></a>5 打包成android apk</h3><p>我的最终目的是打包成apk安装到手机看效果，所以就没有说去安装android模拟器去调试，<br>CLI输入以下命令：<br><code>cordova build android --verbose</code><br>如果第一次打包需要下载gradle等其他文件，此处如果没有梯子，90%会一直卡在下载中。<br>打包完成输出如下：<br><img src="/images/cordova-tutorials/6.png" alt="&#39;cordova安装成功输出&#39;"><br>我打包尝试了5次，最后终于成功可以看到这里花了40多分钟，所以此处成功与否全靠网速和梯子速度。<br>最后可以去<code>*\myApp\platforms\android\build\outputs\apk</code>目录找到打包完成<br>的<code>android-debug.apk</code>安装到手机显示，编辑项目中<code>www</code>目录下的文件就是我们前端要开发的内容</p>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6 总结"></a>6 总结</h3><p>因为本人也是第一次接触Cordova打包工具，此教程只是简单的探索cordova打包过程，<br>此工具使用其实很简单就是那些命令；但是如果没有梯子不建议尝试。<br>后续我会继续尝试打包到<em>IOS</em>平台，欢迎关注！</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/02/08/yarn-配置代理镜像/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
